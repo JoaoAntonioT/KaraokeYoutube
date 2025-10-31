@@ -166,7 +166,7 @@
     function handleVideoEnded(){
       const score = 70 + Math.floor(Math.random()*31);
       animateScore(score);
-      const msgs=["Você é um cantor nato!","Melhore, querida...","Arrasou no palco!","Isso foi de arrepiar!","Quase lá, mas já brilhou!"];
+      const msgs=["Você é um cantor nato!","Melhore, querida...","Arrasou no palco!","Isso foi de arrepiar!","Quase lá, mas já brilhou!", "O importante é competir. E você... competiu.", "Você foi muito bem naquelas partes que a música fica em silêncio.", "Foi bom, mas os vizinhos pediram para abaixar o volume", "Ok, o microfone sobreviveu.", "O importante é que você se divertiu.", "O Spotify já tem essa música. Mas não essa versão.", "Isso não foi uma música. Foi uma experiência auditiva.", "UAU! Que energia! Quase quebrou o equipamento!", "Uma performance memorável.", "Nossos algoritmos não estavam preparados para isso."];
       const msg=msgs[Math.floor(Math.random()*msgs.length)];
       history.push({videoId:currentVideoId,title:currentVideoTitle,score,time:Date.now(),msg});
       if(history.length>200) history=history.slice(-200);
