@@ -57,7 +57,7 @@
 <body>
   <div class="app">
     <header>
-      <h1>Festa Junina (Julhina -> Agostina-> SETEMBRINA).</h1>
+      <h1>Karaokê do Youtube.</h1>
       <div class="controls">
         <input id="q" type="search" placeholder="Procure uma música (ex: 'Adele Rolling in the Deep')" />
         <button id="searchBtn">Pesquisar</button>
@@ -74,7 +74,7 @@
     <aside class="right">
       <div class="score-box">
         <div style="display:flex;justify-content:space-between;align-items:center">
-          <div><strong>Pontuação</strong><div class="small">Gerada ao final do vídeo</div></div>
+          <div><strong>Pontuação</strong><div class="small">Essa é sua nota:</div></div>
           <button id="resetScores" style="background:transparent;color:var(--accent);border:1px solid rgba(255,255,255,0.04);padding:6px 8px;border-radius:6px;cursor:pointer">Limpar</button>
         </div>
         <div style="margin-top:10px">
@@ -164,7 +164,7 @@
     function onPlayerStateChange(e){ if(e.data===0) handleVideoEnded(); }
 
     function handleVideoEnded(){
-      const score = 70 + Math.floor(Math.random()*31); // sempre >=70
+      const score = 70 + Math.floor(Math.random()*31);
       animateScore(score);
       const msgs=["Você é um cantor nato!","Melhore, querida...","Arrasou no palco!","Isso foi de arrepiar!","Quase lá, mas já brilhou!"];
       const msg=msgs[Math.floor(Math.random()*msgs.length)];
@@ -185,7 +185,7 @@
       },100);
     }
 
-    function fireConfetti(){/* igual ao seu código, mantive simplificado */ }
+    function fireConfetti()
 
     document.getElementById('searchBtn').onclick=()=>{const q=document.getElementById('q').value.trim();if(q)searchYouTube(q);}
     document.getElementById('q').addEventListener('keydown',ev=>{if(ev.key==='Enter')document.getElementById('searchBtn').click();});
