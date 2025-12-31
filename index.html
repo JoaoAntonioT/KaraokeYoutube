@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Karaokê de Natal 🎄</title>
+  <title>Karaokê de Ano Novo 🎆</title>
 
   <style>
     :root{
-      --bg:#0b1d13;
-      --card:#112a1c;
-      --accent:#c62828;
-      --accent2:#2e7d32;
-      --text:#f1f8e9;
-      --muted:#b7cbbd;
+      --bg:#050b1a;
+      --card:#0b1430;
+      --accent:#fbc02d;
+      --accent2:#1e88e5;
+      --text:#f5f7ff;
+      --muted:#b8c0e0;
       --glass:rgba(255,255,255,0.06);
       --max-width:1100px;
     }
@@ -21,8 +21,8 @@
 
     body{
       margin:0;
-      font-family: "Segoe UI", Roboto, Arial, sans-serif;
-      background: radial-gradient(circle at top, #1b5e20, #08130c);
+      font-family:"Segoe UI", Roboto, Arial, sans-serif;
+      background:radial-gradient(circle at top, #1a237e, #020617);
       color:var(--text);
       display:flex;
       justify-content:center;
@@ -48,7 +48,7 @@
 
     h1{
       margin:0;
-      font-size:1.5rem;
+      font-size:1.6rem;
     }
 
     .controls{
@@ -60,29 +60,25 @@
     input{
       padding:10px 12px;
       border-radius:8px;
-      border:1px solid rgba(255,255,255,0.1);
+      border:1px solid rgba(255,255,255,0.15);
       background:var(--glass);
       color:var(--text);
     }
 
     button{
-      background:var(--accent);
+      background:linear-gradient(135deg,var(--accent),#ffeb3b);
       border:none;
-      color:white;
-      padding:10px 14px;
+      color:#000;
+      padding:10px 16px;
       border-radius:8px;
       cursor:pointer;
-      font-weight:600;
-    }
-
-    button:hover{
-      opacity:0.9;
+      font-weight:700;
     }
 
     .left{
       background:linear-gradient(180deg, rgba(255,255,255,0.05), transparent);
       padding:14px;
-      border-radius:14px;
+      border-radius:16px;
     }
 
     .player-wrap{
@@ -110,12 +106,14 @@
     .result{
       background:rgba(255,255,255,0.06);
       padding:8px;
-      border-radius:8px;
+      border-radius:10px;
       cursor:pointer;
+      transition:0.2s;
     }
 
     .result:hover{
-      background:rgba(255,255,255,0.12);
+      background:rgba(255,255,255,0.14);
+      transform:translateY(-2px);
     }
 
     .result img{
@@ -131,22 +129,22 @@
     .right{
       background:linear-gradient(180deg, rgba(255,255,255,0.05), transparent);
       padding:14px;
-      border-radius:14px;
+      border-radius:16px;
       display:flex;
       flex-direction:column;
       gap:14px;
     }
 
     .score-box{
-      background:rgba(0,0,0,0.4);
-      padding:12px;
-      border-radius:10px;
+      background:rgba(0,0,0,0.45);
+      padding:14px;
+      border-radius:12px;
     }
 
     .big-score{
-      font-size:2.6rem;
-      font-weight:800;
-      color:#ffeb3b;
+      font-size:2.8rem;
+      font-weight:900;
+      color:var(--accent);
       text-align:center;
     }
 
@@ -161,154 +159,138 @@
       overflow:auto;
     }
 
-    .hist-item{
-      padding:8px 4px;
-      border-bottom:1px solid rgba(255,255,255,0.08);
-    }
-
     footer{
       grid-column:1/-1;
       text-align:center;
       color:var(--muted);
-      margin-top:10px;
       font-size:0.85rem;
-    }
-
-    @media(max-width:900px){
-      .app{grid-template-columns:1fr}
     }
   </style>
 </head>
 
 <body>
-  <div class="app">
+<div class="app">
 
-    <header>
-      <h1>🎅 Karaokê de Natal 🎶</h1>
-      <div class="controls">
-        <input id="q" type="search" placeholder="Pesquisar música de Natal..." />
-        <button id="searchBtn">Buscar</button>
-      </div>
-    </header>
+<header>
+  <h1>🎆 Karaokê 2026 - Feliz Ano Novo! 🎤</h1>
+  <div class="controls">
+    <input id="q" type="search" placeholder="Pesquisar música para a virada..." />
+    <button id="searchBtn">Buscar</button>
+  </div>
+</header>
 
-    <main class="left">
-      <div class="player-wrap">
-        <div id="player"></div>
-      </div>
-      <div class="results" id="results"></div>
-    </main>
+<main class="left">
+  <div class="player-wrap"><div id="player"></div></div>
+  <div class="results" id="results"></div>
+</main>
 
-    <aside class="right">
-      <div class="score-box">
-        <strong>Pontuação Final 🎄</strong>
-        <div class="big-score" id="lastScore">—</div>
-        <div class="small" id="lastMsg"></div>
-      </div>
-
-      <div class="score-box">
-        <strong>Histórico 🎁</strong>
-        <div class="history" id="history"></div>
-      </div>
-    </aside>
-
-    <footer>
-      🎄 Criado por Jota — Que seu Natal seja afinado 🎶
-    </footer>
+<aside class="right">
+  <div class="score-box">
+    <strong>Nota da Virada 🥂</strong>
+    <div class="big-score" id="lastScore">—</div>
+    <div class="small" id="lastMsg"></div>
   </div>
 
-  <!-- YOUTUBE PLAYER -->
-  <script src="https://www.youtube.com/iframe_api"></script>
+  <div class="score-box">
+    <strong>Retrospectiva 🎇</strong>
+    <div class="history" id="history"></div>
+  </div>
+</aside>
 
-  <script>
-    const YT_API_KEY = "AIzaSyAjeqfNjSBkSh_4d4y7igxxJdSVqOQPgiw";
-    const MAX_RESULTS = 10;
+<footer>✨ Criado por Jota. Que o próximo ano seja afinado e próspero 🎶</footer>
 
-    let player;
-    let currentTitle = "";
+</div>
 
-    const history = JSON.parse(localStorage.getItem("karaoke_natal") || "[]");
+<script src="https://www.youtube.com/iframe_api"></script>
 
-    function onYouTubeIframeAPIReady(){
-      player = new YT.Player("player", {
-        height:"360",
-        width:"640",
-        videoId:"",
-        playerVars:{rel:0},
-        events:{ onStateChange }
-      });
-    }
+<script>
+const YT_API_KEY = "AIzaSyAjeqfNjSBkSh_4d4y7igxxJdSVqOQPgiw";
+const MAX_RESULTS = 10;
 
-    function onStateChange(e){
-      if(e.data === YT.PlayerState.ENDED){
-        finalizarApresentacao();
-      }
-    }
+let player;
+let currentTitle = "";
 
-    async function buscar(){
-      const q = document.getElementById("q").value.trim();
-      if(!q) return;
+const history = JSON.parse(localStorage.getItem("karaoke_ano_novo") || "[]");
 
-      const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=${MAX_RESULTS}&q=${encodeURIComponent(q)}&key=${YT_API_KEY}`;
-      const res = await fetch(url);
-      const data = await res.json();
+function onYouTubeIframeAPIReady(){
+  player = new YT.Player("player", {
+    playerVars:{rel:0},
+    events:{ onStateChange }
+  });
+}
 
-      const box = document.getElementById("results");
-      box.innerHTML = "";
+function onStateChange(e){
+  if(e.data === YT.PlayerState.ENDED){
+    finalizarApresentacao();
+  }
+}
 
-      data.items.forEach(v=>{
-        const div = document.createElement("div");
-        div.className = "result";
-        div.innerHTML = `
-          <img src="${v.snippet.thumbnails.medium.url}">
-          <h4>${v.snippet.title}</h4>
-        `;
-        div.onclick = ()=>{
-          currentTitle = v.snippet.title;
-          player.loadVideoById(v.id.videoId);
-          document.getElementById("lastScore").textContent="—";
-          document.getElementById("lastMsg").textContent="";
-        };
-        box.appendChild(div);
-      });
-    }
+async function buscar(){
+  let termoUsuario = document.getElementById("q").value.trim().toLowerCase();
+  if(!termoUsuario) return;
 
-    function finalizarApresentacao(){
-      const nota = 70 + Math.floor(Math.random()*31);
-      const frases = [
-        "🎅 O Papai Noel aprova essa afinação!",
-        "🎄 Que voz mais natalina!",
-        "🔔 Os sinos tocaram só pra você!",
-        "☃️ Frio lá fora, quente no palco!",
-        "🎁 Essa apresentação merece presente!"
-      ];
+  const queryFinal = termoUsuario.includes("karaoke")
+    ? termoUsuario
+    : `${termoUsuario} karaoke letra`;
 
-      const msg = frases[Math.floor(Math.random()*frases.length)];
+  const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=${MAX_RESULTS}&q=${encodeURIComponent(queryFinal)}&key=${YT_API_KEY}`;
+  const res = await fetch(url);
+  const data = await res.json();
 
-      document.getElementById("lastScore").textContent = nota;
-      document.getElementById("lastMsg").textContent = msg;
+  const box = document.getElementById("results");
+  box.innerHTML = "";
 
-      history.push({title:currentTitle, nota, msg});
-      localStorage.setItem("karaoke_natal", JSON.stringify(history));
-      renderHistory();
-    }
+  data.items.forEach(v=>{
+    const div = document.createElement("div");
+    div.className="result";
+    div.innerHTML=`
+      <img src="${v.snippet.thumbnails.medium.url}">
+      <h4>${v.snippet.title}</h4>
+    `;
+    div.onclick=()=>{
+      currentTitle = v.snippet.title;
+      player.loadVideoById(v.id.videoId);
+      lastScore.textContent="—";
+      lastMsg.textContent="";
+    };
+    box.appendChild(div);
+  });
+}
 
-    function renderHistory(){
-      const box = document.getElementById("history");
-      box.innerHTML = "";
-      history.slice().reverse().forEach(h=>{
-        const d = document.createElement("div");
-        d.className="hist-item";
-        d.innerHTML = `<strong>${h.title}</strong><br><span class="small">${h.nota} — ${h.msg}</span>`;
-        box.appendChild(d);
-      });
-    }
+function finalizarApresentacao(){
+  const nota = 70 + Math.floor(Math.random()*31);
+  const frases = [
+    "🎆 Começando o ano com o pé direito!",
+    "🥂 Essa voz merece um brinde!",
+    "✨ Que essa energia vá até dezembro!",
+    "🎇 Explodiu igual fogos na virada!",
+    "💫 Afinação nível ano novo, vida nova!"
+  ];
 
-    document.getElementById("searchBtn").onclick = buscar;
-    document.getElementById("q").addEventListener("keydown",e=>{
-      if(e.key==="Enter") buscar();
-    });
+  const msg = frases[Math.floor(Math.random()*frases.length)];
 
-    renderHistory();
-  </script>
+  lastScore.textContent = nota;
+  lastMsg.textContent = msg;
+
+  history.push({title:currentTitle, nota, msg});
+  localStorage.setItem("karaoke_ano_novo", JSON.stringify(history));
+  renderHistory();
+}
+
+function renderHistory(){
+  const box = document.getElementById("history");
+  box.innerHTML="";
+  history.slice().reverse().forEach(h=>{
+    const d=document.createElement("div");
+    d.innerHTML=`<strong>${h.title}</strong><br><span class="small">${h.nota} — ${h.msg}</span>`;
+    box.appendChild(d);
+  });
+}
+
+searchBtn.onclick=buscar;
+q.addEventListener("keydown",e=>{ if(e.key==="Enter") buscar(); });
+
+renderHistory();
+</script>
 </body>
 </html>
