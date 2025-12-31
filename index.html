@@ -7,17 +7,11 @@
 
   <style>
     :root{
-      --bg:#050b1a;
-      --card:#0b1430;
       --accent:#fbc02d;
-      --accent2:#1e88e5;
       --text:#f5f7ff;
       --muted:#b8c0e0;
       --glass:rgba(255,255,255,0.06);
-      --max-width:1100px;
     }
-
-    *{box-sizing:border-box}
 
     body{
       margin:0;
@@ -32,7 +26,7 @@
 
     .app{
       width:100%;
-      max-width:var(--max-width);
+      max-width:1100px;
       display:grid;
       grid-template-columns:1fr 380px;
       gap:20px;
@@ -43,39 +37,28 @@
       display:flex;
       justify-content:space-between;
       align-items:center;
-      gap:16px;
     }
 
-    h1{
-      margin:0;
-      font-size:1.6rem;
-    }
+    h1{margin:0;font-size:1.6rem}
 
-    .controls{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
+    input,button{
+      padding:10px 14px;
+      border-radius:8px;
+      border:none;
     }
 
     input{
-      padding:10px 12px;
-      border-radius:8px;
-      border:1px solid rgba(255,255,255,0.15);
       background:var(--glass);
       color:var(--text);
     }
 
     button{
       background:linear-gradient(135deg,var(--accent),#ffeb3b);
-      border:none;
-      color:#000;
-      padding:10px 16px;
-      border-radius:8px;
-      cursor:pointer;
       font-weight:700;
+      cursor:pointer;
     }
 
-    .left{
+    .left,.right{
       background:linear-gradient(180deg, rgba(255,255,255,0.05), transparent);
       padding:14px;
       border-radius:16px;
@@ -104,60 +87,30 @@
     }
 
     .result{
-      background:rgba(255,255,255,0.06);
+      background:rgba(255,255,255,0.08);
       padding:8px;
       border-radius:10px;
       cursor:pointer;
-      transition:0.2s;
     }
 
-    .result:hover{
-      background:rgba(255,255,255,0.14);
-      transform:translateY(-2px);
-    }
-
-    .result img{
-      width:100%;
-      border-radius:6px;
-    }
-
-    .result h4{
-      margin:6px 0 0;
-      font-size:0.9rem;
-    }
-
-    .right{
-      background:linear-gradient(180deg, rgba(255,255,255,0.05), transparent);
-      padding:14px;
-      border-radius:16px;
-      display:flex;
-      flex-direction:column;
-      gap:14px;
-    }
+    .result img{width:100%;border-radius:6px}
 
     .score-box{
       background:rgba(0,0,0,0.45);
       padding:14px;
       border-radius:12px;
+      margin-bottom:14px;
     }
 
     .big-score{
-      font-size:2.8rem;
+      font-size:3rem;
       font-weight:900;
       color:var(--accent);
       text-align:center;
+      letter-spacing:2px;
     }
 
-    .small{
-      font-size:0.85rem;
-      color:var(--muted);
-      text-align:center;
-    }
-
-    .history{
-      max-height:300px;
-      overflow:auto;
-    }
+    .small{text-align:center;color:var(--muted)}
 
     footer{
       grid-column:1/-1;
@@ -172,19 +125,19 @@
 <div class="app">
 
 <header>
-  <h1>🎆 Karaokê 2026 - Feliz Ano Novo! 🎤</h1>
-  <div class="controls">
-    <input id="q" type="search" placeholder="Pesquisar música para a virada..." />
+  <h1>🎆 Karaokê 2026 - Feliz Ano Novo 🎤</h1>
+  <div>
+    <input id="q" placeholder="Pesquisar música..." />
     <button id="searchBtn">Buscar</button>
   </div>
 </header>
 
-<main class="left">
+<div class="left">
   <div class="player-wrap"><div id="player"></div></div>
   <div class="results" id="results"></div>
-</main>
+</div>
 
-<aside class="right">
+<div class="right">
   <div class="score-box">
     <strong>Nota da Virada 🥂</strong>
     <div class="big-score" id="lastScore">—</div>
@@ -193,11 +146,11 @@
 
   <div class="score-box">
     <strong>Retrospectiva 🎇</strong>
-    <div class="history" id="history"></div>
+    <div id="history"></div>
   </div>
-</aside>
+</div>
 
-<footer>✨ Criado por Jota. Que o próximo ano seja afinado e próspero 🎶</footer>
+<footer>✨ Criado por Jota — Que o próximo ano seja afinado 🎶</footer>
 
 </div>
 
@@ -209,7 +162,6 @@ const MAX_RESULTS = 10;
 
 let player;
 let currentTitle = "";
-
 const history = JSON.parse(localStorage.getItem("karaoke_ano_novo") || "[]");
 
 function onYouTubeIframeAPIReady(){
@@ -226,70 +178,75 @@ function onStateChange(e){
 }
 
 async function buscar(){
-  let termoUsuario = document.getElementById("q").value.trim().toLowerCase();
-  if(!termoUsuario) return;
+  let termo = q.value.trim().toLowerCase();
+  if(!termo) return;
 
-  const queryFinal = termoUsuario.includes("karaoke")
-    ? termoUsuario
-    : `${termoUsuario} karaoke letra`;
+  const query = termo.includes("karaoke")
+    ? termo
+    : `${termo} karaoke letra`;
 
-  const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=${MAX_RESULTS}&q=${encodeURIComponent(queryFinal)}&key=${YT_API_KEY}`;
+  const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=${MAX_RESULTS}&q=${encodeURIComponent(query)}&key=${YT_API_KEY}`;
   const res = await fetch(url);
   const data = await res.json();
 
-  const box = document.getElementById("results");
-  box.innerHTML = "";
-
+  results.innerHTML = "";
   data.items.forEach(v=>{
-    const div = document.createElement("div");
-    div.className="result";
-    div.innerHTML=`
-      <img src="${v.snippet.thumbnails.medium.url}">
-      <h4>${v.snippet.title}</h4>
-    `;
-    div.onclick=()=>{
-      currentTitle = v.snippet.title;
+    const d=document.createElement("div");
+    d.className="result";
+    d.innerHTML=`<img src="${v.snippet.thumbnails.medium.url}"><h4>${v.snippet.title}</h4>`;
+    d.onclick=()=>{
+      currentTitle=v.snippet.title;
       player.loadVideoById(v.id.videoId);
       lastScore.textContent="—";
       lastMsg.textContent="";
     };
-    box.appendChild(div);
+    results.appendChild(d);
   });
 }
 
+/* 🎰 EFEITO CAÇA-NÍQUEIS */
 function finalizarApresentacao(){
-  const nota = 70 + Math.floor(Math.random()*31);
+  const notaFinal = 70 + Math.floor(Math.random()*31);
   const frases = [
     "🎆 Começando o ano com o pé direito!",
     "🥂 Essa voz merece um brinde!",
-    "✨ Que essa energia vá até dezembro!",
     "🎇 Explodiu igual fogos na virada!",
-    "💫 Afinação nível ano novo, vida nova!"
+    "✨ Energia de ano novo!",
+    "💫 Afinação nível premium!"
   ];
 
-  const msg = frases[Math.floor(Math.random()*frases.length)];
+  lastMsg.textContent = "Calculando...";
+  let contador = 0;
 
-  lastScore.textContent = nota;
-  lastMsg.textContent = msg;
+  const slot = setInterval(()=>{
+    lastScore.textContent = Math.floor(Math.random()*100);
+    contador++;
+  }, 80);
 
-  history.push({title:currentTitle, nota, msg});
-  localStorage.setItem("karaoke_ano_novo", JSON.stringify(history));
-  renderHistory();
+  setTimeout(()=>{
+    clearInterval(slot);
+    lastScore.textContent = notaFinal;
+
+    const msg = frases[Math.floor(Math.random()*frases.length)];
+    lastMsg.textContent = msg;
+
+    history.push({title:currentTitle, nota:notaFinal, msg});
+    localStorage.setItem("karaoke_ano_novo", JSON.stringify(history));
+    renderHistory();
+  }, 2000);
 }
 
 function renderHistory(){
-  const box = document.getElementById("history");
-  box.innerHTML="";
+  historyBox.innerHTML="";
   history.slice().reverse().forEach(h=>{
-    const d=document.createElement("div");
-    d.innerHTML=`<strong>${h.title}</strong><br><span class="small">${h.nota} — ${h.msg}</span>`;
-    box.appendChild(d);
+    historyBox.innerHTML += `<div><strong>${h.title}</strong><br><small>${h.nota} — ${h.msg}</small></div>`;
   });
 }
 
-searchBtn.onclick=buscar;
+searchBtn.onclick = buscar;
 q.addEventListener("keydown",e=>{ if(e.key==="Enter") buscar(); });
 
+const historyBox = document.getElementById("history");
 renderHistory();
 </script>
 </body>
