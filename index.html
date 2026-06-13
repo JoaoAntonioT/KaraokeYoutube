@@ -3,73 +3,328 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Karaokê de Ano Novo 🎆</title>
+  <title>Karaokê da Torcida Brasil 🇧🇷🎤</title>
 
   <style>
     :root{
-      --accent:#fbc02d;
-      --text:#f5f7ff;
-      --muted:#b8c0e0;
-      --glass:rgba(255,255,255,0.06);
+      --green:#009c3b;
+      --green-dark:#003f1f;
+      --yellow:#ffdf00;
+      --yellow-soft:#ffe96b;
+      --blue:#002776;
+      --blue-soft:#1b4dff;
+      --white:#f8fbff;
+      --text:#f8fbff;
+      --muted:#c8d5ef;
+      --muted-2:#8fa4ce;
+      --danger:#ff6961;
+
+      --glass:rgba(255,255,255,0.095);
+      --glass-strong:rgba(255,255,255,0.145);
+      --glass-border:rgba(255,255,255,0.18);
+
+      --shadow-soft:0 18px 50px rgba(0,0,0,0.28);
+      --shadow-card:0 14px 35px rgba(0,0,0,0.22);
+      --radius-lg:24px;
+      --radius-md:18px;
+      --radius-sm:12px;
+
+      --transition:180ms ease;
+    }
+
+    *{
+      box-sizing:border-box;
     }
 
     body{
       margin:0;
+      min-height:100vh;
       font-family:"Segoe UI", Roboto, Arial, sans-serif;
-      background:radial-gradient(circle at top, #1a237e, #020617);
       color:var(--text);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255,223,0,0.35), transparent 22%),
+        radial-gradient(circle at 80% 0%, rgba(27,77,255,0.35), transparent 25%),
+        radial-gradient(circle at 50% 100%, rgba(0,156,59,0.45), transparent 28%),
+        linear-gradient(135deg, #031b14 0%, #061d46 48%, #020713 100%);
       display:flex;
       justify-content:center;
       padding:28px;
-      min-height:100vh;
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:0.24;
+      background:
+        linear-gradient(90deg, transparent 49%, rgba(255,255,255,0.08) 50%, transparent 51%),
+        linear-gradient(0deg, transparent 49%, rgba(255,255,255,0.05) 50%, transparent 51%);
+      background-size:90px 90px;
+      mask-image:radial-gradient(circle at center, black, transparent 78%);
+    }
+
+    body::after{
+      content:"";
+      position:fixed;
+      inset:-20%;
+      pointer-events:none;
+      background:
+        conic-gradient(from 180deg at 50% 0%, transparent, rgba(255,255,255,0.12), transparent 18%),
+        conic-gradient(from 180deg at 15% 0%, transparent, rgba(255,223,0,0.12), transparent 14%),
+        conic-gradient(from 180deg at 85% 0%, transparent, rgba(0,156,59,0.12), transparent 14%);
+      filter:blur(8px);
+      opacity:0.7;
+      animation:lights 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes lights{
+      from{transform:translateX(-2%) rotate(-1deg);}
+      to{transform:translateX(2%) rotate(1deg);}
     }
 
     .app{
       width:100%;
-      max-width:1100px;
+      max-width:1180px;
       display:grid;
-      grid-template-columns:1fr 380px;
-      gap:20px;
+      grid-template-columns:minmax(0, 1fr) 390px;
+      gap:22px;
+      position:relative;
+      z-index:1;
     }
 
     header{
       grid-column:1/-1;
-      display:flex;
-      justify-content:space-between;
+      display:grid;
+      grid-template-columns:minmax(0, 1fr) minmax(320px, 440px);
+      gap:18px;
       align-items:center;
+      padding:22px;
+      border:1px solid var(--glass-border);
+      border-radius:var(--radius-lg);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.055)),
+        linear-gradient(90deg, rgba(0,156,59,0.25), rgba(255,223,0,0.12), rgba(0,39,118,0.28));
+      box-shadow:var(--shadow-soft);
+      backdrop-filter:blur(18px);
+      overflow:hidden;
+      position:relative;
     }
 
-    h1{margin:0;font-size:1.6rem}
+    header::before{
+      content:"🏟️  🇧🇷  🥇  🎤  📣";
+      position:absolute;
+      right:20px;
+      top:-16px;
+      font-size:4.6rem;
+      letter-spacing:10px;
+      opacity:0.08;
+      white-space:nowrap;
+      pointer-events:none;
+    }
 
-    input,button{
-      padding:10px 14px;
-      border-radius:8px;
+    .hero{
+      min-width:0;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      width:max-content;
+      max-width:100%;
+      padding:7px 11px;
+      margin-bottom:10px;
+      border-radius:999px;
+      background:rgba(0,0,0,0.28);
+      border:1px solid rgba(255,255,255,0.18);
+      color:var(--yellow-soft);
+      font-size:0.78rem;
+      font-weight:800;
+      letter-spacing:0.08em;
+      text-transform:uppercase;
+      box-shadow:0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    .live-dot{
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:var(--yellow);
+      box-shadow:0 0 0 0 rgba(255,223,0,0.7);
+      animation:pulse 1.4s infinite;
+      flex:0 0 auto;
+    }
+
+    @keyframes pulse{
+      0%{box-shadow:0 0 0 0 rgba(255,223,0,0.7);}
+      70%{box-shadow:0 0 0 10px rgba(255,223,0,0);}
+      100%{box-shadow:0 0 0 0 rgba(255,223,0,0);}
+    }
+
+    h1{
+      margin:0;
+      font-size:clamp(1.7rem, 4vw, 3.15rem);
+      line-height:1;
+      letter-spacing:-0.05em;
+      text-wrap:balance;
+    }
+
+    .subtitle{
+      margin:10px 0 0;
+      color:var(--muted);
+      font-size:1rem;
+      line-height:1.45;
+      max-width:680px;
+    }
+
+    .search-panel{
+      position:relative;
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:10px;
+      padding:10px;
+      border-radius:18px;
+      background:rgba(0,0,0,0.25);
+      border:1px solid rgba(255,255,255,0.15);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,0.08);
+    }
+
+    input,
+    button{
+      font:inherit;
       border:none;
+      outline:none;
     }
 
     input{
-      background:var(--glass);
+      width:100%;
+      min-width:0;
+      padding:14px 15px;
+      border-radius:14px;
+      background:rgba(255,255,255,0.10);
       color:var(--text);
+      border:1px solid rgba(255,255,255,0.12);
+      transition:var(--transition);
+    }
+
+    input::placeholder{
+      color:rgba(248,251,255,0.58);
+    }
+
+    input:hover{
+      background:rgba(255,255,255,0.13);
+    }
+
+    input:focus{
+      border-color:rgba(255,223,0,0.75);
+      box-shadow:0 0 0 4px rgba(255,223,0,0.14);
     }
 
     button{
-      background:linear-gradient(135deg,var(--accent),#ffeb3b);
-      font-weight:700;
+      padding:13px 17px;
+      border-radius:14px;
+      background:linear-gradient(135deg, var(--yellow), #fff176);
+      color:#18200a;
+      font-weight:900;
       cursor:pointer;
+      transition:transform var(--transition), box-shadow var(--transition), filter var(--transition);
+      box-shadow:0 12px 25px rgba(255,223,0,0.18);
+      white-space:nowrap;
     }
 
-    .left,.right{
-      background:linear-gradient(180deg, rgba(255,255,255,0.05), transparent);
-      padding:14px;
-      border-radius:16px;
+    button:hover{
+      transform:translateY(-2px);
+      filter:saturate(1.08);
+      box-shadow:0 16px 32px rgba(255,223,0,0.26);
+    }
+
+    button:focus-visible{
+      box-shadow:0 0 0 4px rgba(255,255,255,0.22), 0 14px 28px rgba(255,223,0,0.24);
+    }
+
+    button:active{
+      transform:translateY(0) scale(0.99);
+    }
+
+    button:disabled{
+      cursor:not-allowed;
+      opacity:0.7;
+      transform:none;
+      filter:grayscale(0.2);
+    }
+
+    .left,
+    .right{
+      border-radius:var(--radius-lg);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.045));
+      border:1px solid var(--glass-border);
+      box-shadow:var(--shadow-card);
+      backdrop-filter:blur(16px);
+    }
+
+    .left{
+      padding:16px;
+      min-width:0;
+    }
+
+    .right{
+      padding:16px;
+      align-self:start;
+      position:sticky;
+      top:24px;
+    }
+
+    .section-title{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin:0 0 12px;
+      font-size:0.82rem;
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:0.10em;
+      font-weight:800;
+    }
+
+    .section-title span:last-child{
+      color:var(--yellow-soft);
+      font-size:0.78rem;
+      white-space:nowrap;
+    }
+
+    .player-shell{
+      padding:10px;
+      border-radius:22px;
+      background:
+        linear-gradient(135deg, rgba(0,156,59,0.65), rgba(255,223,0,0.45), rgba(0,39,118,0.65));
+      box-shadow:0 18px 42px rgba(0,0,0,0.35);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .player-shell::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 12% 10%, rgba(255,255,255,0.45), transparent 14%),
+        radial-gradient(circle at 90% 15%, rgba(255,255,255,0.32), transparent 18%);
+      opacity:0.35;
+      pointer-events:none;
     }
 
     .player-wrap{
       background:#000;
-      border-radius:12px;
+      border-radius:16px;
       overflow:hidden;
       position:relative;
       padding-top:56.25%;
+      z-index:1;
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,0.1);
     }
 
     #player{
@@ -79,175 +334,684 @@
       height:100%;
     }
 
+    .status-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin:14px 2px 0;
+      color:var(--muted);
+      font-size:0.92rem;
+    }
+
+    .now-playing{
+      min-width:0;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+
+    .arena-chip{
+      flex:0 0 auto;
+      color:#07210e;
+      background:linear-gradient(135deg, #d9ff6c, var(--yellow));
+      padding:7px 10px;
+      border-radius:999px;
+      font-weight:900;
+      font-size:0.78rem;
+    }
+
+    .feedback{
+      min-height:24px;
+      margin:14px 2px 0;
+      color:var(--muted);
+      font-size:0.92rem;
+    }
+
+    .feedback.error{
+      color:#ffd1ce;
+    }
+
     .results{
       margin-top:14px;
       display:grid;
       grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
-      gap:10px;
+      gap:12px;
     }
 
     .result{
-      background:rgba(255,255,255,0.08);
-      padding:8px;
-      border-radius:10px;
+      min-width:0;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.13), rgba(255,255,255,0.055));
+      border:1px solid rgba(255,255,255,0.14);
+      padding:9px;
+      border-radius:16px;
       cursor:pointer;
+      transition:transform var(--transition), border-color var(--transition), background var(--transition), box-shadow var(--transition);
+      overflow:hidden;
+      position:relative;
     }
 
-    .result img{width:100%;border-radius:6px}
+    .result::after{
+      content:"Tocar agora";
+      position:absolute;
+      top:14px;
+      right:14px;
+      background:rgba(0,0,0,0.58);
+      color:var(--yellow-soft);
+      font-weight:900;
+      font-size:0.7rem;
+      padding:6px 8px;
+      border-radius:999px;
+      opacity:0;
+      transform:translateY(-5px);
+      transition:var(--transition);
+      pointer-events:none;
+    }
+
+    .result:hover{
+      transform:translateY(-4px);
+      border-color:rgba(255,223,0,0.55);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.075));
+      box-shadow:0 16px 30px rgba(0,0,0,0.22);
+    }
+
+    .result:hover::after{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    .result:focus-within{
+      border-color:rgba(255,223,0,0.65);
+    }
+
+    .result img{
+      width:100%;
+      aspect-ratio:16/9;
+      object-fit:cover;
+      border-radius:12px;
+      display:block;
+      background:rgba(0,0,0,0.25);
+    }
+
+    .result h4{
+      margin:10px 2px 2px;
+      font-size:0.92rem;
+      line-height:1.25;
+      color:var(--white);
+      display:-webkit-box;
+      -webkit-line-clamp:2;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+    }
 
     .score-box{
-      background:rgba(0,0,0,0.45);
-      padding:14px;
-      border-radius:12px;
+      position:relative;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.36), rgba(0,0,0,0.22));
+      border:1px solid rgba(255,255,255,0.14);
+      padding:16px;
+      border-radius:20px;
       margin-bottom:14px;
+      overflow:hidden;
+    }
+
+    .score-box::before{
+      content:"";
+      position:absolute;
+      inset:auto -20% -38% -20%;
+      height:80px;
+      background:radial-gradient(circle, rgba(255,223,0,0.26), transparent 65%);
+      pointer-events:none;
+    }
+
+    .score-label{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      font-size:0.84rem;
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:0.1em;
+      font-weight:900;
+      position:relative;
+      z-index:1;
+    }
+
+    .score-label em{
+      color:var(--yellow-soft);
+      font-style:normal;
+      font-size:0.74rem;
+      white-space:nowrap;
+    }
+
+    .scoreboard{
+      margin-top:12px;
+      padding:15px 12px;
+      border-radius:18px;
+      background:
+        linear-gradient(135deg, rgba(0,39,118,0.75), rgba(0,0,0,0.45)),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.055) 0 1px, transparent 1px 9px);
+      border:1px solid rgba(255,255,255,0.14);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,0.1);
+      position:relative;
+      z-index:1;
     }
 
     .big-score{
-      font-size:3rem;
-      font-weight:900;
-      color:var(--accent);
+      font-size:clamp(3.2rem, 8vw, 5rem);
+      line-height:0.95;
+      font-weight:1000;
+      color:var(--yellow);
       text-align:center;
-      letter-spacing:2px;
+      letter-spacing:-0.06em;
+      text-shadow:0 0 24px rgba(255,223,0,0.30);
+      font-variant-numeric:tabular-nums;
     }
 
-    .small{text-align:center;color:var(--muted)}
+    .points{
+      margin-top:3px;
+      text-align:center;
+      color:var(--muted);
+      font-weight:800;
+      letter-spacing:0.16em;
+      text-transform:uppercase;
+      font-size:0.72rem;
+    }
+
+    .small{
+      min-height:22px;
+      margin-top:12px;
+      text-align:center;
+      color:var(--white);
+      line-height:1.4;
+      font-weight:700;
+      position:relative;
+      z-index:1;
+    }
+
+    .history-list{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      position:relative;
+      z-index:1;
+    }
+
+    .history-empty{
+      color:var(--muted);
+      line-height:1.45;
+      font-size:0.94rem;
+      padding:6px 0 2px;
+    }
+
+    .history-item{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:8px;
+      align-items:center;
+      padding:11px;
+      border-radius:14px;
+      background:rgba(255,255,255,0.08);
+      border:1px solid rgba(255,255,255,0.10);
+    }
+
+    .history-title{
+      min-width:0;
+      font-weight:800;
+      font-size:0.9rem;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+
+    .history-msg{
+      grid-column:1/-1;
+      color:var(--muted);
+      font-size:0.8rem;
+      line-height:1.35;
+    }
+
+    .history-score{
+      padding:7px 9px;
+      border-radius:999px;
+      background:linear-gradient(135deg, var(--yellow), #fff6a8);
+      color:#1e270a;
+      font-weight:1000;
+      font-size:0.84rem;
+      white-space:nowrap;
+      font-variant-numeric:tabular-nums;
+    }
 
     footer{
       grid-column:1/-1;
       text-align:center;
       color:var(--muted);
-      font-size:0.85rem;
+      font-size:0.9rem;
+      padding:6px 0 2px;
+    }
+
+    .loading-dots::after{
+      content:"";
+      animation:dots 1.2s steps(4, end) infinite;
+    }
+
+    @keyframes dots{
+      0%{content:"";}
+      25%{content:".";}
+      50%{content:"..";}
+      75%{content:"...";}
+      100%{content:"";}
+    }
+
+    @media (max-width:980px){
+      body{
+        padding:18px;
+      }
+
+      .app{
+        grid-template-columns:1fr;
+      }
+
+      header{
+        grid-template-columns:1fr;
+      }
+
+      .right{
+        position:static;
+      }
+    }
+
+    @media (max-width:620px){
+      body{
+        padding:12px;
+      }
+
+      header,
+      .left,
+      .right{
+        border-radius:20px;
+      }
+
+      header{
+        padding:18px;
+      }
+
+      .search-panel{
+        grid-template-columns:1fr;
+      }
+
+      button{
+        width:100%;
+      }
+
+      .results{
+        grid-template-columns:1fr;
+      }
+
+      .status-row{
+        align-items:flex-start;
+        flex-direction:column;
+      }
+
+      .arena-chip{
+        width:max-content;
+      }
+
+      .score-label{
+        align-items:flex-start;
+        flex-direction:column;
+      }
+
+      footer{
+        font-size:0.82rem;
+      }
+    }
+
+    @media (prefers-reduced-motion:reduce){
+      *,
+      *::before,
+      *::after{
+        animation:none !important;
+        transition:none !important;
+        scroll-behavior:auto !important;
+      }
     }
   </style>
 </head>
 
 <body>
-<div class="app">
+  <div class="app">
 
-<header>
-  <h1>🎆 Karaokê 2026 - Feliz Ano Novo 🎤</h1>
-  <div>
-    <input id="q" placeholder="Pesquisar música..." />
-    <button id="searchBtn">Buscar</button>
+    <header>
+      <div class="hero">
+        <div class="badge">
+          <span class="live-dot"></span>
+          Ao vivo da torcida
+        </div>
+
+        <h1>Karaokê da Torcida Brasil 🇧🇷🎤</h1>
+
+        <p class="subtitle">
+          Escolha a música, solte a voz e entre no clima do Brasil. Aqui é arquibancada,
+          emoção olímpica e resenha entre amigos.
+        </p>
+      </div>
+
+      <div class="search-panel" aria-label="Busca de músicas no YouTube">
+        <input
+          id="q"
+          type="search"
+          placeholder="Pesquisar música para cantar..."
+          autocomplete="off"
+          aria-label="Pesquisar música"
+        />
+        <button id="searchBtn" type="button">Buscar 📣</button>
+      </div>
+    </header>
+
+    <main class="left">
+      <div class="section-title">
+        <strong>Arena musical</strong>
+        <span>Brasil em campo</span>
+      </div>
+
+      <div class="player-shell">
+        <div class="player-wrap">
+          <div id="player"></div>
+        </div>
+      </div>
+
+      <div class="status-row">
+        <div class="now-playing" id="nowPlaying">
+          Nenhuma música selecionada ainda.
+        </div>
+        <div class="arena-chip">Modo torcida 🇧🇷</div>
+      </div>
+
+      <div class="feedback" id="feedback">
+        Pesquise uma música para começar o aquecimento da torcida.
+      </div>
+
+      <section class="results" id="results" aria-label="Resultados da busca"></section>
+    </main>
+
+    <aside class="right">
+      <section class="score-box">
+        <div class="score-label">
+          <strong>Nota da Torcida</strong>
+          <em>Placar oficial</em>
+        </div>
+
+        <div class="scoreboard">
+          <div class="big-score" id="lastScore">—</div>
+          <div class="points">pontos</div>
+        </div>
+
+        <div class="small" id="lastMsg">
+          A próxima performance pode virar replay da noite.
+        </div>
+      </section>
+
+      <section class="score-box">
+        <div class="score-label">
+          <strong>Placar das Apresentações</strong>
+          <em>Histórico</em>
+        </div>
+
+        <div class="history-list" id="history"></div>
+      </section>
+    </aside>
+
+    <footer>
+      Criado por Jota — Hoje é Brasil no peito e música na voz 🇧🇷🎶
+    </footer>
+
   </div>
-</header>
 
-<div class="left">
-  <div class="player-wrap"><div id="player"></div></div>
-  <div class="results" id="results"></div>
-</div>
+  <script src="https://www.youtube.com/iframe_api"></script>
 
-<div class="right">
-  <div class="score-box">
-    <strong>Nota da Virada 🥂</strong>
-    <div class="big-score" id="lastScore">—</div>
-    <div class="small" id="lastMsg"></div>
-  </div>
+  <script>
+    const YT_API_KEY = "AIzaSyAjeqfNjSBkSh_4d4y7igxxJdSVqOQPgiw";
 
-  <div class="score-box">
-    <strong>Retrospectiva 🎇</strong>
-    <div id="history"></div>
-  </div>
-</div>
+    const MAX_RESULTS = 10;
+    const STORAGE_KEY = "karaoke_torcida_brasil";
 
-<footer>✨ Criado por Jota — Que o próximo ano seja afinado 🎶</footer>
+    let player;
+    let currentTitle = "";
 
-</div>
+    const searchInput = document.getElementById("q");
+    const searchBtn = document.getElementById("searchBtn");
+    const resultsBox = document.getElementById("results");
+    const feedbackBox = document.getElementById("feedback");
+    const nowPlayingBox = document.getElementById("nowPlaying");
+    const lastScoreBox = document.getElementById("lastScore");
+    const lastMsgBox = document.getElementById("lastMsg");
+    const historyBox = document.getElementById("history");
 
-<script src="https://www.youtube.com/iframe_api"></script>
+    const history = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
 
-<script>
-const YT_API_KEY = "AIzaSyAjeqfNjSBkSh_4d4y7igxxJdSVqOQPgiw";
-const MAX_RESULTS = 10;
+    function onYouTubeIframeAPIReady(){
+      player = new YT.Player("player", {
+        playerVars:{
+          rel:0,
+          modestbranding:1
+        },
+        events:{
+          onStateChange
+        }
+      });
+    }
 
-let player;
-let currentTitle = "";
-const history = JSON.parse(localStorage.getItem("karaoke_ano_novo") || "[]");
+    function onStateChange(event){
+      if(event.data === YT.PlayerState.ENDED){
+        finalizarApresentacao();
+      }
+    }
 
-function onYouTubeIframeAPIReady(){
-  player = new YT.Player("player", {
-    playerVars:{rel:0},
-    events:{ onStateChange }
-  });
-}
+    function setFeedback(message, type = ""){
+      feedbackBox.textContent = message;
+      feedbackBox.className = type ? `feedback ${type}` : "feedback";
+    }
 
-function onStateChange(e){
-  if(e.data === YT.PlayerState.ENDED){
-    finalizarApresentacao();
-  }
-}
+    function setLoading(isLoading){
+      searchBtn.disabled = isLoading;
+      searchBtn.textContent = isLoading ? "Buscando" : "Buscar 📣";
 
-async function buscar(){
-  let termo = q.value.trim().toLowerCase();
-  if(!termo) return;
+      if(isLoading){
+        searchBtn.classList.add("loading-dots");
+      }else{
+        searchBtn.classList.remove("loading-dots");
+      }
+    }
 
-  const query = termo.includes("karaoke")
-    ? termo
-    : `${termo} karaoke letra`;
+    function sanitizeTitle(title){
+      const temp = document.createElement("textarea");
+      temp.innerHTML = title;
+      return temp.value;
+    }
 
-  const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=${MAX_RESULTS}&q=${encodeURIComponent(query)}&key=${YT_API_KEY}`;
-  const res = await fetch(url);
-  const data = await res.json();
+    async function buscar(){
+      const termo = searchInput.value.trim();
 
-  results.innerHTML = "";
-  data.items.forEach(v=>{
-    const d=document.createElement("div");
-    d.className="result";
-    d.innerHTML=`<img src="${v.snippet.thumbnails.medium.url}"><h4>${v.snippet.title}</h4>`;
-    d.onclick=()=>{
-      currentTitle=v.snippet.title;
-      player.loadVideoById(v.id.videoId);
-      lastScore.textContent="—";
-      lastMsg.textContent="";
-    };
-    results.appendChild(d);
-  });
-}
+      if(!termo){
+        setFeedback("Digite o nome de uma música para a torcida começar o aquecimento.", "error");
+        searchInput.focus();
+        return;
+      }
 
-/* 🎰 EFEITO CAÇA-NÍQUEIS */
-function finalizarApresentacao(){
-  const notaFinal = 70 + Math.floor(Math.random()*31);
-  const frases = [
-    "🎆 Começando o ano com o pé direito!",
-    "🥂 Essa voz merece um brinde!",
-    "🎇 Explodiu igual fogos na virada!",
-    "✨ Energia de ano novo!",
-    "💫 Afinação nível premium!"
-  ];
+      if(YT_API_KEY === "COLE_SUA_CHAVE_DA_API_AQUI"){
+        setFeedback("Insira sua chave da API do YouTube no código para ativar a busca.", "error");
+        return;
+      }
 
-  lastMsg.textContent = "Calculando...";
-  let contador = 0;
+      const query = termo.toLowerCase().includes("karaoke")
+        ? termo
+        : `${termo} karaoke letra`;
 
-  const slot = setInterval(()=>{
-    lastScore.textContent = Math.floor(Math.random()*100);
-    contador++;
-  }, 80);
+      const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=${MAX_RESULTS}&q=${encodeURIComponent(query)}&key=${YT_API_KEY}`;
 
-  setTimeout(()=>{
-    clearInterval(slot);
-    lastScore.textContent = notaFinal;
+      setLoading(true);
+      setFeedback("A torcida está procurando os melhores vídeos para você cantar...");
+      resultsBox.innerHTML = "";
 
-    const msg = frases[Math.floor(Math.random()*frases.length)];
-    lastMsg.textContent = msg;
+      try{
+        const response = await fetch(url);
 
-    history.push({title:currentTitle, nota:notaFinal, msg});
-    localStorage.setItem("karaoke_ano_novo", JSON.stringify(history));
+        if(!response.ok){
+          throw new Error("Falha na resposta da API do YouTube.");
+        }
+
+        const data = await response.json();
+
+        if(!data.items || data.items.length === 0){
+          setFeedback("Nenhum resultado encontrado. Tente buscar pelo nome da música e artista.", "error");
+          return;
+        }
+
+        renderResults(data.items);
+        setFeedback(`${data.items.length} opções encontradas. Escolha uma e prepare o gogó.`);
+      }catch(error){
+        console.error(error);
+        setFeedback("Não foi possível buscar no YouTube agora. Verifique a chave da API, a conexão ou tente novamente.", "error");
+      }finally{
+        setLoading(false);
+      }
+    }
+
+    function renderResults(items){
+      resultsBox.innerHTML = "";
+
+      items.forEach(video => {
+        const title = sanitizeTitle(video.snippet.title);
+        const thumbnail = video.snippet.thumbnails?.medium?.url || video.snippet.thumbnails?.default?.url;
+        const videoId = video.id.videoId;
+
+        if(!videoId) return;
+
+        const card = document.createElement("article");
+        card.className = "result";
+        card.tabIndex = 0;
+        card.setAttribute("role", "button");
+        card.setAttribute("aria-label", `Tocar ${title}`);
+
+        card.innerHTML = `
+          <img src="${thumbnail}" alt="">
+          <h4 title="${title}">${title}</h4>
+        `;
+
+        const playVideo = () => {
+          currentTitle = title;
+          player.loadVideoById(videoId);
+
+          lastScoreBox.textContent = "—";
+          lastMsgBox.textContent = "Valendo ponto, medalha moral e grito da galera.";
+          nowPlayingBox.textContent = `Tocando agora: ${title}`;
+          setFeedback("Música carregada. Quando terminar, a Nota da Torcida aparece automaticamente.");
+        };
+
+        card.addEventListener("click", playVideo);
+
+        card.addEventListener("keydown", event => {
+          if(event.key === "Enter" || event.key === " "){
+            event.preventDefault();
+            playVideo();
+          }
+        });
+
+        resultsBox.appendChild(card);
+      });
+    }
+
+    /* 🎰 EFEITO CAÇA-NÍQUEIS */
+    function finalizarApresentacao(){
+      if(!currentTitle){
+        return;
+      }
+
+      const notaFinal = 70 + Math.floor(Math.random() * 31);
+
+      const frases = [
+        
+        "😌 Afinação opcional, carisma obrigatório!", "🎤 Tecnicamente duvidoso, emocionalmente impecável!", "😂 A voz foi no susto, mas a presença entregou tudo!", "🔥 Não sabemos a nota vocal, mas a autoestima foi 10!", "👏 Errou pouco, brilhou muito, e é isso que importa!", "🎶 A melodia tentou fugir, mas o carisma segurou!", "😎 Cantou como quem confia no próprio marketing!", "✨ A afinação oscilou, mas a lenda nasceu!", "🎤 Foi no talento? Talvez. Na coragem? Com certeza!", "😂 A música sofreu, mas a turma amou!", "🔥 A voz deu umas voltas, mas chegou no destino!", "👏 Não foi playback, foi bravura ao vivo!", "😌 A nota veio, a vergonha não!", "🎶 Afinou na intenção e venceu no carisma!", "🎤 A técnica chorou, mas a plateia aplaudiu!", "😂 Quem entendeu a letra, entendeu. Quem não entendeu, sentiu!", "✨ Presença de palco maior que a grade curricular!", "🔥 Cantou como quem não teme comentários no grupo!", "👏 A melodia balançou, mas não caiu!", "😎 Confiança de artista, preparo de aluno na véspera!", "🎤 O microfone ficou confuso, mas respeitou!", "😂 Foi uma experiência sonora e acadêmica!", "🎶 A música saiu diferente, mas saiu com personalidade!", "🔥 Entregou tudo, inclusive algumas notas inesperadas!", "👏 A turma não pediu bis, mas pensou com carinho!", "😌 A afinação foi freestyle, o carisma foi oficial!", "🎤 O refrão veio forte, o resto veio na amizade!", "😂 Cantou como quem descobriu a letra em tempo real!", "✨ Foi caótico, foi fofo, foi memorável!", "🔥 A energia compensou qualquer detalhe técnico!", "👏 A voz passeou, mas a presença ficou!", "🎶 O tom mudou, mas o espírito venceu!", "😎 Entrou cantor casual, saiu patrimônio da resenha!", "🎤 A nota musical fugiu, mas a nota do site veio!", "😂 Performance digna de print no grupo da turma!", "🔥 Cantou com a segurança de quem não leu o slide!", "👏 A plateia riu, vibrou e adotou a apresentação!", "😌 Deu tudo quase certo, e isso já é lindo!", "🎶 Afinação em beta, carisma em versão final!", "🎤 A voz foi sincera, mesmo quando não foi exata!", "😂 O ouvido questionou, mas o coração aprovou!", "✨ Brilhou tanto que ninguém teve tempo de julgar!", "🔥 O palco viu coisas, mas saiu agradecido!", "👏 A entrega foi maior que trabalho de fim de período!", "😎 Cantou como veterano em semana de integração!", "🎶 A melodia pediu calma, mas você foi com emoção!", "🎤 A voz foi no improviso, o sucesso foi planejado!", "😂 A apresentação foi ousada e surpreendentemente querida!", "🔥 Se faltou nota, sobrou personalidade!", "👏 Não foi perfeito, foi melhor: foi inesquecível!", "😌 Afinou quando quis, encantou o tempo todo!", "🎶 O ritmo correu, você correu atrás, e deu show!", "🎤 Cantou como quem sabe que amigo perdoa tudo!", "😂 A música mudou de gênero, mas a turma comprou a ideia!", "✨ A estética foi coragem com brilho nos olhos!", "🔥 Essa voz não pediu licença, só entrou no campus!", "👏 A apresentação teve curvas, mas chegou aplaudida!", "😎 O Grammy universitário já está em análise!", "🎤 A letra escapou, mas a dignidade permaneceu!", "😂 O tom foi surpresa, mas a vibe foi perfeita!",  "😂 Cantou como quem não tem prova amanhã!", "🎤 Essa foi mais emocionante que apresentação de TCC!", "📚 A afinação faltou aula, mas a presença foi 100%!", "🔥 O microfone pediu trancamento de matrícula, mas gostou!", "😎 Cantou com a confiança de quem não leu o edital!", "🍕 Essa performance merece desconto na cantina!", "📣 A turma riu, aplaudiu e fingiu que sabia a letra!", "🎓 Nota maior que muita média final por aí!", "💸 Cantou como quem esqueceu o boleto da faculdade!", "😴 A voz veio com sono, mas o carisma passou direto!", "🎤 Isso foi menos ensaio e mais coragem acadêmica!", "👏 A vergonha alheia tentou chegar, mas virou aplauso!", "📝 Se fosse seminário, ganhava ponto por presença!", "😂 Começou duvidoso, terminou patrimônio da turma!", "🔥 A nota subiu mais rápido que ansiedade em semana de prova!", "🎶 A letra fugiu, mas a autoestima ficou!", "📚 Cantou como quem estudou só pelo resumo do grupo!", "🏆 Essa performance foi aprovada no conselho de classe!", "🍟 A cantina parou por três segundos pra ouvir isso!", "😌 Errou com convicção, e isso também é arte!", "🎤 Afinou no carisma e passou raspando na melodia!", "😂 Foi caótico? Foi. Foi icônico? Também!", "🚀 A voz decolou sem autorização da coordenação!", "📖 Essa versão nem o professor esperava!", "🥇 Medalha de ouro em cantar sem saber a segunda parte!", "🗣️ O refrão veio forte, o resto veio na fé!", "🎧 O DJ fingiu normalidade, mas sentiu o impacto!", "🤝 Trabalho em grupo nenhum teve tanta entrega!", "🔥 A apresentação foi instável, mas lendária!", "🎓 Isso aqui vale pelo menos duas horas complementares!", 
+      ];"🎤 A resenha ficou séria agora!", "🔥 Essa apresentação elevou o nível da turma!", "✨ O karaokê universitário acaba de ganhar um ícone!", "🎓 Cantou como se valesse nota na AV2!", "📣 A turma foi à loucura!", "🥇 Performance digna de medalha no RU!", "😂 Isso aqui virou show de intervalo!", "🎶 Afinou mais que trabalho em grupo bem feito!", "🚀 Essa voz passou direto!", "👏 Professor nenhum reprovaria essa apresentação!", "🌟 Nasceu uma lenda do campus!", "🎤 Microfone desbloqueado com sucesso!", "🔥 O auditório imaginário aplaudiu de pé!", "📚 Cantou mais que estudou pra prova!", "🥳 Essa foi pra fechar a noite com chave de ouro!", "💅 Entregou voz, presença e conceito!", "🏆 Nota alta e moral elevada!", "🎧 DJ do campus aprovou!", "🤩 Essa entrou pro histórico da turma!", "🍕 Performance boa o suficiente pra merecer pizza!", "🎭 Presença de palco nível semana acadêmica!", "🗣️ Soltou a voz sem medo do coeficiente!", "⚡ Energia de quem dormiu oito horas!", "🎤 Hoje o protagonismo veio forte!", "✨ A faculdade não estava pronta pra isso!", "👏 Palmas acadêmicas para essa lenda!", "🔥 Isso aqui merecia certificado de horas complementares!", "🎶 Cantou bonito e ainda saiu com moral!", "🏛️ O campus inteiro sentiu essa energia!", "🥂 Essa apresentação merece brinde no pós-aula!"
+
+      lastMsgBox.textContent = "A comissão da torcida está calculando...";
+      let contador = 0;
+
+      const slot = setInterval(() => {
+        const randomScore = Math.floor(Math.random() * 101);
+        lastScoreBox.textContent = randomScore;
+        contador++;
+      }, 80);
+
+      setTimeout(() => {
+        clearInterval(slot);
+
+        const msg = frases[Math.floor(Math.random() * frases.length)];
+
+        lastScoreBox.textContent = notaFinal;
+        lastMsgBox.textContent = msg;
+
+        history.push({
+          title: currentTitle,
+          nota: notaFinal,
+          msg,
+          date: new Date().toISOString()
+        });
+
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
+        renderHistory();
+      }, 2000);
+    }
+
+    function renderHistory(){
+      historyBox.innerHTML = "";
+
+      if(history.length === 0){
+        historyBox.innerHTML = `
+          <div class="history-empty">
+            Ainda não temos apresentações no placar. Quando a primeira música terminar,
+            a torcida registra a nota aqui.
+          </div>
+        `;
+        return;
+      }
+
+      history
+        .slice()
+        .reverse()
+        .forEach(item => {
+          const row = document.createElement("div");
+          row.className = "history-item";
+
+          row.innerHTML = `
+            <div class="history-title" title="${item.title}">
+              ${item.title}
+            </div>
+            <div class="history-score">
+              ${item.nota} pts
+            </div>
+            <div class="history-msg">
+              ${item.msg}
+            </div>
+          `;
+
+          historyBox.appendChild(row);
+        });
+    }
+
+    searchBtn.addEventListener("click", buscar);
+
+    searchInput.addEventListener("keydown", event => {
+      if(event.key === "Enter"){
+        buscar();
+      }
+    });
+
     renderHistory();
-  }, 2000);
-}
-
-function renderHistory(){
-  historyBox.innerHTML="";
-  history.slice().reverse().forEach(h=>{
-    historyBox.innerHTML += `<div><strong>${h.title}</strong><br><small>${h.nota} — ${h.msg}</small></div>`;
-  });
-}
-
-searchBtn.onclick = buscar;
-q.addEventListener("keydown",e=>{ if(e.key==="Enter") buscar(); });
-
-const historyBox = document.getElementById("history");
-renderHistory();
-</script>
+  </script>
 </body>
 </html>
