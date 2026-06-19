@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Karaokê da Torcida Brasil 🇧🇷🎤</title>
+  <title>Karalhokê do Allan 🏳️‍🌈🎤</title>
 
   <style>
     :root{
@@ -12,29 +12,17 @@
       --yellow:#ffdf00;
       --yellow-soft:#ffe96b;
       --blue:#002776;
-      --blue-soft:#1b4dff;
       --white:#f8fbff;
       --text:#f8fbff;
       --muted:#c8d5ef;
-      --muted-2:#8fa4ce;
-      --danger:#ff6961;
-
-      --glass:rgba(255,255,255,0.095);
-      --glass-strong:rgba(255,255,255,0.145);
       --glass-border:rgba(255,255,255,0.18);
-
       --shadow-soft:0 18px 50px rgba(0,0,0,0.28);
       --shadow-card:0 14px 35px rgba(0,0,0,0.22);
       --radius-lg:24px;
-      --radius-md:18px;
-      --radius-sm:12px;
-
       --transition:180ms ease;
     }
 
-    *{
-      box-sizing:border-box;
-    }
+    *{ box-sizing:border-box; }
 
     body{
       margin:0;
@@ -65,25 +53,6 @@
       mask-image:radial-gradient(circle at center, black, transparent 78%);
     }
 
-    body::after{
-      content:"";
-      position:fixed;
-      inset:-20%;
-      pointer-events:none;
-      background:
-        conic-gradient(from 180deg at 50% 0%, transparent, rgba(255,255,255,0.12), transparent 18%),
-        conic-gradient(from 180deg at 15% 0%, transparent, rgba(255,223,0,0.12), transparent 14%),
-        conic-gradient(from 180deg at 85% 0%, transparent, rgba(0,156,59,0.12), transparent 14%);
-      filter:blur(8px);
-      opacity:0.7;
-      animation:lights 8s ease-in-out infinite alternate;
-    }
-
-    @keyframes lights{
-      from{transform:translateX(-2%) rotate(-1deg);}
-      to{transform:translateX(2%) rotate(1deg);}
-    }
-
     .app{
       width:100%;
       max-width:1180px;
@@ -112,28 +81,10 @@
       position:relative;
     }
 
-    header::before{
-      content:"🏟️  🇧🇷  🥇  🎤  📣";
-      position:absolute;
-      right:20px;
-      top:-16px;
-      font-size:4.6rem;
-      letter-spacing:10px;
-      opacity:0.08;
-      white-space:nowrap;
-      pointer-events:none;
-    }
-
-    .hero{
-      min-width:0;
-    }
-
     .badge{
       display:inline-flex;
       align-items:center;
       gap:8px;
-      width:max-content;
-      max-width:100%;
       padding:7px 11px;
       margin-bottom:10px;
       border-radius:999px;
@@ -144,7 +95,6 @@
       font-weight:800;
       letter-spacing:0.08em;
       text-transform:uppercase;
-      box-shadow:0 10px 25px rgba(0,0,0,0.2);
     }
 
     .live-dot{
@@ -152,9 +102,7 @@
       height:8px;
       border-radius:50%;
       background:var(--yellow);
-      box-shadow:0 0 0 0 rgba(255,223,0,0.7);
       animation:pulse 1.4s infinite;
-      flex:0 0 auto;
     }
 
     @keyframes pulse{
@@ -168,7 +116,6 @@
       font-size:clamp(1.7rem, 4vw, 3.15rem);
       line-height:1;
       letter-spacing:-0.05em;
-      text-wrap:balance;
     }
 
     .subtitle{
@@ -180,7 +127,6 @@
     }
 
     .search-panel{
-      position:relative;
       display:grid;
       grid-template-columns:1fr auto;
       gap:10px;
@@ -188,11 +134,9 @@
       border-radius:18px;
       background:rgba(0,0,0,0.25);
       border:1px solid rgba(255,255,255,0.15);
-      box-shadow:inset 0 1px 0 rgba(255,255,255,0.08);
     }
 
-    input,
-    button{
+    input, button{
       font:inherit;
       border:none;
       outline:none;
@@ -200,27 +144,14 @@
 
     input{
       width:100%;
-      min-width:0;
       padding:14px 15px;
       border-radius:14px;
       background:rgba(255,255,255,0.10);
       color:var(--text);
       border:1px solid rgba(255,255,255,0.12);
-      transition:var(--transition);
     }
 
-    input::placeholder{
-      color:rgba(248,251,255,0.58);
-    }
-
-    input:hover{
-      background:rgba(255,255,255,0.13);
-    }
-
-    input:focus{
-      border-color:rgba(255,223,0,0.75);
-      box-shadow:0 0 0 4px rgba(255,223,0,0.14);
-    }
+    input::placeholder{ color:rgba(248,251,255,0.58); }
 
     button{
       padding:13px 17px;
@@ -229,37 +160,12 @@
       color:#18200a;
       font-weight:900;
       cursor:pointer;
-      transition:transform var(--transition), box-shadow var(--transition), filter var(--transition);
       box-shadow:0 12px 25px rgba(255,223,0,0.18);
-      white-space:nowrap;
     }
 
-    button:hover{
-      transform:translateY(-2px);
-      filter:saturate(1.08);
-      box-shadow:0 16px 32px rgba(255,223,0,0.26);
-    }
-
-    button:focus-visible{
-      box-shadow:0 0 0 4px rgba(255,255,255,0.22), 0 14px 28px rgba(255,223,0,0.24);
-    }
-
-    button:active{
-      transform:translateY(0) scale(0.99);
-    }
-
-    button:disabled{
-      cursor:not-allowed;
-      opacity:0.7;
-      transform:none;
-      filter:grayscale(0.2);
-    }
-
-    .left,
-    .right{
+    .left, .right{
       border-radius:var(--radius-lg);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.045));
+      background:linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.045));
       border:1px solid var(--glass-border);
       box-shadow:var(--shadow-card);
       backdrop-filter:blur(16px);
@@ -279,7 +185,6 @@
 
     .section-title{
       display:flex;
-      align-items:center;
       justify-content:space-between;
       gap:12px;
       margin:0 0 12px;
@@ -293,28 +198,14 @@
     .section-title span:last-child{
       color:var(--yellow-soft);
       font-size:0.78rem;
-      white-space:nowrap;
     }
 
     .player-shell{
       padding:10px;
       border-radius:22px;
-      background:
-        linear-gradient(135deg, rgba(0,156,59,0.65), rgba(255,223,0,0.45), rgba(0,39,118,0.65));
+      background:linear-gradient(135deg, rgba(0,156,59,0.65), rgba(255,223,0,0.45), rgba(0,39,118,0.65));
       box-shadow:0 18px 42px rgba(0,0,0,0.35);
-      position:relative;
       overflow:hidden;
-    }
-
-    .player-shell::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(circle at 12% 10%, rgba(255,255,255,0.45), transparent 14%),
-        radial-gradient(circle at 90% 15%, rgba(255,255,255,0.32), transparent 18%);
-      opacity:0.35;
-      pointer-events:none;
     }
 
     .player-wrap{
@@ -323,8 +214,6 @@
       overflow:hidden;
       position:relative;
       padding-top:56.25%;
-      z-index:1;
-      box-shadow:inset 0 0 0 1px rgba(255,255,255,0.1);
     }
 
     #player{
@@ -336,7 +225,6 @@
 
     .status-row{
       display:flex;
-      align-items:center;
       justify-content:space-between;
       gap:10px;
       margin:14px 2px 0;
@@ -345,14 +233,12 @@
     }
 
     .now-playing{
-      min-width:0;
       overflow:hidden;
       text-overflow:ellipsis;
       white-space:nowrap;
     }
 
     .arena-chip{
-      flex:0 0 auto;
       color:#07210e;
       background:linear-gradient(135deg, #d9ff6c, var(--yellow));
       padding:7px 10px;
@@ -368,9 +254,7 @@
       font-size:0.92rem;
     }
 
-    .feedback.error{
-      color:#ffd1ce;
-    }
+    .feedback.error{ color:#ffd1ce; }
 
     .results{
       margin-top:14px;
@@ -380,50 +264,12 @@
     }
 
     .result{
-      min-width:0;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.13), rgba(255,255,255,0.055));
+      background:linear-gradient(180deg, rgba(255,255,255,0.13), rgba(255,255,255,0.055));
       border:1px solid rgba(255,255,255,0.14);
       padding:9px;
       border-radius:16px;
       cursor:pointer;
-      transition:transform var(--transition), border-color var(--transition), background var(--transition), box-shadow var(--transition);
       overflow:hidden;
-      position:relative;
-    }
-
-    .result::after{
-      content:"Tocar agora";
-      position:absolute;
-      top:14px;
-      right:14px;
-      background:rgba(0,0,0,0.58);
-      color:var(--yellow-soft);
-      font-weight:900;
-      font-size:0.7rem;
-      padding:6px 8px;
-      border-radius:999px;
-      opacity:0;
-      transform:translateY(-5px);
-      transition:var(--transition);
-      pointer-events:none;
-    }
-
-    .result:hover{
-      transform:translateY(-4px);
-      border-color:rgba(255,223,0,0.55);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.075));
-      box-shadow:0 16px 30px rgba(0,0,0,0.22);
-    }
-
-    .result:hover::after{
-      opacity:1;
-      transform:translateY(0);
-    }
-
-    .result:focus-within{
-      border-color:rgba(255,223,0,0.65);
     }
 
     .result img{
@@ -432,7 +278,6 @@
       object-fit:cover;
       border-radius:12px;
       display:block;
-      background:rgba(0,0,0,0.25);
     }
 
     .result h4{
@@ -440,16 +285,11 @@
       font-size:0.92rem;
       line-height:1.25;
       color:var(--white);
-      display:-webkit-box;
-      -webkit-line-clamp:2;
-      -webkit-box-orient:vertical;
-      overflow:hidden;
     }
 
     .score-box{
       position:relative;
-      background:
-        linear-gradient(180deg, rgba(0,0,0,0.36), rgba(0,0,0,0.22));
+      background:linear-gradient(180deg, rgba(0,0,0,0.36), rgba(0,0,0,0.22));
       border:1px solid rgba(255,255,255,0.14);
       padding:16px;
       border-radius:20px;
@@ -457,18 +297,8 @@
       overflow:hidden;
     }
 
-    .score-box::before{
-      content:"";
-      position:absolute;
-      inset:auto -20% -38% -20%;
-      height:80px;
-      background:radial-gradient(circle, rgba(255,223,0,0.26), transparent 65%);
-      pointer-events:none;
-    }
-
     .score-label{
       display:flex;
-      align-items:center;
       justify-content:space-between;
       gap:10px;
       font-size:0.84rem;
@@ -484,7 +314,6 @@
       color:var(--yellow-soft);
       font-style:normal;
       font-size:0.74rem;
-      white-space:nowrap;
     }
 
     .scoreboard{
@@ -495,9 +324,6 @@
         linear-gradient(135deg, rgba(0,39,118,0.75), rgba(0,0,0,0.45)),
         repeating-linear-gradient(90deg, rgba(255,255,255,0.055) 0 1px, transparent 1px 9px);
       border:1px solid rgba(255,255,255,0.14);
-      box-shadow:inset 0 1px 0 rgba(255,255,255,0.1);
-      position:relative;
-      z-index:1;
     }
 
     .big-score{
@@ -508,7 +334,6 @@
       text-align:center;
       letter-spacing:-0.06em;
       text-shadow:0 0 24px rgba(255,223,0,0.30);
-      font-variant-numeric:tabular-nums;
     }
 
     .points{
@@ -528,16 +353,12 @@
       color:var(--white);
       line-height:1.4;
       font-weight:700;
-      position:relative;
-      z-index:1;
     }
 
     .history-list{
       display:flex;
       flex-direction:column;
       gap:10px;
-      position:relative;
-      z-index:1;
     }
 
     .history-empty{
@@ -559,7 +380,6 @@
     }
 
     .history-title{
-      min-width:0;
       font-weight:800;
       font-size:0.9rem;
       overflow:hidden;
@@ -581,8 +401,82 @@
       color:#1e270a;
       font-weight:1000;
       font-size:0.84rem;
-      white-space:nowrap;
-      font-variant-numeric:tabular-nums;
+    }
+
+    .photo-frame{
+      position:relative;
+      height:220px;
+      border-radius:18px;
+      overflow:hidden;
+      margin-top:12px;
+      background:
+        linear-gradient(135deg, rgba(0,39,118,0.75), rgba(0,0,0,0.45)),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.055) 0 1px, transparent 1px 9px);
+      border:1px solid rgba(255,255,255,0.14);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+
+    .photo-frame::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(255,223,0,0.20), transparent 35%),
+        linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.45));
+      z-index:5;
+    }
+
+    .birthday-hat{
+      position:absolute;
+      top:8px;
+      right:10px;
+      z-index:10;
+      font-size:2.2rem;
+      transform:rotate(12deg);
+      filter:drop-shadow(0 6px 10px rgba(0,0,0,0.45));
+    }
+
+    .photo-slider{
+      width:100%;
+      height:100%;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .photo-slider img{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      opacity:0;
+      transform:translateX(-100%);
+      transition:opacity 900ms ease, transform 900ms ease;
+    }
+
+    .photo-slider img.active{
+      opacity:1;
+      transform:translateX(0);
+    }
+
+    .photo-slider img.exit{
+      opacity:0;
+      transform:translateX(100%);
+    }
+
+    .photo-caption{
+      position:absolute;
+      left:12px;
+      right:12px;
+      bottom:10px;
+      z-index:10;
+      color:var(--yellow-soft);
+      font-size:0.78rem;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:0.08em;
+      text-shadow:0 3px 8px rgba(0,0,0,0.7);
     }
 
     footer{
@@ -607,76 +501,36 @@
     }
 
     @media (max-width:980px){
-      body{
-        padding:18px;
-      }
+      body{ padding:18px; }
 
-      .app{
-        grid-template-columns:1fr;
-      }
+      .app{ grid-template-columns:1fr; }
 
-      header{
-        grid-template-columns:1fr;
-      }
+      header{ grid-template-columns:1fr; }
 
-      .right{
-        position:static;
-      }
+      .right{ position:static; }
     }
 
     @media (max-width:620px){
-      body{
-        padding:12px;
-      }
+      body{ padding:12px; }
 
-      header,
-      .left,
-      .right{
-        border-radius:20px;
-      }
+      header, .left, .right{ border-radius:20px; }
 
-      header{
-        padding:18px;
-      }
+      header{ padding:18px; }
 
-      .search-panel{
-        grid-template-columns:1fr;
-      }
+      .search-panel{ grid-template-columns:1fr; }
 
-      button{
-        width:100%;
-      }
+      button{ width:100%; }
 
-      .results{
-        grid-template-columns:1fr;
-      }
+      .results{ grid-template-columns:1fr; }
 
       .status-row{
         align-items:flex-start;
         flex-direction:column;
       }
 
-      .arena-chip{
-        width:max-content;
-      }
-
       .score-label{
         align-items:flex-start;
         flex-direction:column;
-      }
-
-      footer{
-        font-size:0.82rem;
-      }
-    }
-
-    @media (prefers-reduced-motion:reduce){
-      *,
-      *::before,
-      *::after{
-        animation:none !important;
-        transition:none !important;
-        scroll-behavior:auto !important;
       }
     }
   </style>
@@ -739,6 +593,24 @@
     </main>
 
     <aside class="right">
+
+      <section class="score-box photo-box">
+        <div class="score-label">
+          <strong>Allan Peituda</strong>
+          <em>Gostosão do Dia</em>
+        </div>
+
+        <div class="photo-frame">
+          <div class="birthday-hat">🥳</div>
+
+          <div class="photo-slider" id="photoSlider"></div>
+
+          <div class="photo-caption">
+            Passando os melhores momentos
+          </div>
+        </div>
+      </section>
+
       <section class="score-box">
         <div class="score-label">
           <strong>Nota da Torcida</strong>
@@ -779,6 +651,30 @@
     const MAX_RESULTS = 10;
     const STORAGE_KEY = "karaoke_torcida_brasil";
 
+    const fotosFesta = [
+  "https://imgur.com/a/AAwAYIt",
+  "https://imgur.com/cnZjQ8q",
+  "https://imgur.com/3PsxQBP",
+  "https://imgur.com/8Tne1UO",
+  "https://imgur.com/6V6gBH5",
+  "https://imgur.com/34Hypu4",
+  "https://imgur.com/JwQ016t",
+  "https://imgur.com/CIRh05I",
+  "https://imgur.com/t6LbLaA",
+  "https://imgur.com/S2CW2U3",
+  "https://imgur.com/dNcm3m0",
+  "https://imgur.com/8LRznsH",
+  "https://imgur.com/jFLycuY",
+  "https://imgur.com/ySb6eDL",
+  "https://imgur.com/n2GGpzU",
+  "https://imgur.com/ETszkr0",
+  "https://imgur.com/3JFXRsZ",
+  "https://imgur.com/0coBdZZ",
+  "https://imgur.com/ds9FtJK"
+];
+
+    const TEMPO_FOTO = 6000;
+
     let player;
     let currentTitle = "";
 
@@ -790,6 +686,7 @@
     const lastScoreBox = document.getElementById("lastScore");
     const lastMsgBox = document.getElementById("lastMsg");
     const historyBox = document.getElementById("history");
+    const photoSlider = document.getElementById("photoSlider");
 
     const history = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
 
@@ -842,7 +739,7 @@
         return;
       }
 
-      if(YT_API_KEY === "COLE_SUA_CHAVE_DA_API_AQUI"){
+      if(YT_API_KEY === "SUA_CHAVE_DO_YOUTUBE_AQUI"){
         setFeedback("Insira sua chave da API do YouTube no código para ativar a busca.", "error");
         return;
       }
@@ -925,7 +822,55 @@
       });
     }
 
-    /* 🎰 EFEITO CAÇA-NÍQUEIS */
+    function iniciarFotos(){
+      if(!photoSlider || fotosFesta.length === 0){
+        return;
+      }
+
+      photoSlider.innerHTML = "";
+
+      fotosFesta.forEach((src, index) => {
+        const img = document.createElement("img");
+        img.src = src;
+        img.alt = `Foto da festa ${index + 1}`;
+
+        if(index === 0){
+          img.classList.add("active");
+        }
+
+        photoSlider.appendChild(img);
+      });
+
+      const fotos = photoSlider.querySelectorAll("img");
+
+      if(fotos.length <= 1){
+        return;
+      }
+
+      let fotoAtual = 0;
+
+      setInterval(() => {
+        const fotoAnterior = fotoAtual;
+
+        fotos[fotoAnterior].classList.remove("active");
+        fotos[fotoAnterior].classList.add("exit");
+
+        fotoAtual++;
+
+        if(fotoAtual >= fotos.length){
+          fotoAtual = 0;
+        }
+
+        fotos[fotoAtual].classList.remove("exit");
+        fotos[fotoAtual].classList.add("active");
+
+        setTimeout(() => {
+          fotos[fotoAnterior].classList.remove("exit");
+        }, 900);
+
+      }, TEMPO_FOTO);
+    }
+
     function finalizarApresentacao(){
       if(!currentTitle){
         return;
@@ -934,11 +879,90 @@
       const notaFinal = 70 + Math.floor(Math.random() * 31);
 
       const frases = [
-        
-        "😌 Afinação opcional, carisma obrigatório!", "🎤 Tecnicamente duvidoso, emocionalmente impecável!", "😂 A voz foi no susto, mas a presença entregou tudo!", "🔥 Não sabemos a nota vocal, mas a autoestima foi 10!", "👏 Errou pouco, brilhou muito, e é isso que importa!", "🎶 A melodia tentou fugir, mas o carisma segurou!", "😎 Cantou como quem confia no próprio marketing!", "✨ A afinação oscilou, mas a lenda nasceu!", "🎤 Foi no talento? Talvez. Na coragem? Com certeza!", "😂 A música sofreu, mas a turma amou!", "🔥 A voz deu umas voltas, mas chegou no destino!", "👏 Não foi playback, foi bravura ao vivo!", "😌 A nota veio, a vergonha não!", "🎶 Afinou na intenção e venceu no carisma!", "🎤 A técnica chorou, mas a plateia aplaudiu!", "😂 Quem entendeu a letra, entendeu. Quem não entendeu, sentiu!", "✨ Presença de palco maior que a grade curricular!", "🔥 Cantou como quem não teme comentários no grupo!", "👏 A melodia balançou, mas não caiu!", "😎 Confiança de artista, preparo de aluno na véspera!", "🎤 O microfone ficou confuso, mas respeitou!", "😂 Foi uma experiência sonora e acadêmica!", "🎶 A música saiu diferente, mas saiu com personalidade!", "🔥 Entregou tudo, inclusive algumas notas inesperadas!", "👏 A turma não pediu bis, mas pensou com carinho!", "😌 A afinação foi freestyle, o carisma foi oficial!", "🎤 O refrão veio forte, o resto veio na amizade!", "😂 Cantou como quem descobriu a letra em tempo real!", "✨ Foi caótico, foi fofo, foi memorável!", "🔥 A energia compensou qualquer detalhe técnico!", "👏 A voz passeou, mas a presença ficou!", "🎶 O tom mudou, mas o espírito venceu!", "😎 Entrou cantor casual, saiu patrimônio da resenha!", "🎤 A nota musical fugiu, mas a nota do site veio!", "😂 Performance digna de print no grupo da turma!", "🔥 Cantou com a segurança de quem não leu o slide!", "👏 A plateia riu, vibrou e adotou a apresentação!", "😌 Deu tudo quase certo, e isso já é lindo!", "🎶 Afinação em beta, carisma em versão final!", "🎤 A voz foi sincera, mesmo quando não foi exata!", "😂 O ouvido questionou, mas o coração aprovou!", "✨ Brilhou tanto que ninguém teve tempo de julgar!", "🔥 O palco viu coisas, mas saiu agradecido!", "👏 A entrega foi maior que trabalho de fim de período!", "😎 Cantou como veterano em semana de integração!", "🎶 A melodia pediu calma, mas você foi com emoção!", "🎤 A voz foi no improviso, o sucesso foi planejado!", "😂 A apresentação foi ousada e surpreendentemente querida!", "🔥 Se faltou nota, sobrou personalidade!", "👏 Não foi perfeito, foi melhor: foi inesquecível!", "😌 Afinou quando quis, encantou o tempo todo!", "🎶 O ritmo correu, você correu atrás, e deu show!", "🎤 Cantou como quem sabe que amigo perdoa tudo!", "😂 A música mudou de gênero, mas a turma comprou a ideia!", "✨ A estética foi coragem com brilho nos olhos!", "🔥 Essa voz não pediu licença, só entrou no campus!", "👏 A apresentação teve curvas, mas chegou aplaudida!", "😎 O Grammy universitário já está em análise!", "🎤 A letra escapou, mas a dignidade permaneceu!", "😂 O tom foi surpresa, mas a vibe foi perfeita!",  "😂 Cantou como quem não tem prova amanhã!", "🎤 Essa foi mais emocionante que apresentação de TCC!", "📚 A afinação faltou aula, mas a presença foi 100%!", "🔥 O microfone pediu trancamento de matrícula, mas gostou!", "😎 Cantou com a confiança de quem não leu o edital!", "🍕 Essa performance merece desconto na cantina!", "📣 A turma riu, aplaudiu e fingiu que sabia a letra!", "🎓 Nota maior que muita média final por aí!", "💸 Cantou como quem esqueceu o boleto da faculdade!", "😴 A voz veio com sono, mas o carisma passou direto!", "🎤 Isso foi menos ensaio e mais coragem acadêmica!", "👏 A vergonha alheia tentou chegar, mas virou aplauso!", "📝 Se fosse seminário, ganhava ponto por presença!", "😂 Começou duvidoso, terminou patrimônio da turma!", "🔥 A nota subiu mais rápido que ansiedade em semana de prova!", "🎶 A letra fugiu, mas a autoestima ficou!", "📚 Cantou como quem estudou só pelo resumo do grupo!", "🏆 Essa performance foi aprovada no conselho de classe!", "🍟 A cantina parou por três segundos pra ouvir isso!", "😌 Errou com convicção, e isso também é arte!", "🎤 Afinou no carisma e passou raspando na melodia!", "😂 Foi caótico? Foi. Foi icônico? Também!", "🚀 A voz decolou sem autorização da coordenação!", "📖 Essa versão nem o professor esperava!", "🥇 Medalha de ouro em cantar sem saber a segunda parte!", "🗣️ O refrão veio forte, o resto veio na fé!", "🎧 O DJ fingiu normalidade, mas sentiu o impacto!", "🤝 Trabalho em grupo nenhum teve tanta entrega!", "🔥 A apresentação foi instável, mas lendária!", "🎓 Isso aqui vale pelo menos duas horas complementares!", 
-      ];"🎤 A resenha ficou séria agora!", "🔥 Essa apresentação elevou o nível da turma!", "✨ O karaokê universitário acaba de ganhar um ícone!", "🎓 Cantou como se valesse nota na AV2!", "📣 A turma foi à loucura!", "🥇 Performance digna de medalha no RU!", "😂 Isso aqui virou show de intervalo!", "🎶 Afinou mais que trabalho em grupo bem feito!", "🚀 Essa voz passou direto!", "👏 Professor nenhum reprovaria essa apresentação!", "🌟 Nasceu uma lenda do campus!", "🎤 Microfone desbloqueado com sucesso!", "🔥 O auditório imaginário aplaudiu de pé!", "📚 Cantou mais que estudou pra prova!", "🥳 Essa foi pra fechar a noite com chave de ouro!", "💅 Entregou voz, presença e conceito!", "🏆 Nota alta e moral elevada!", "🎧 DJ do campus aprovou!", "🤩 Essa entrou pro histórico da turma!", "🍕 Performance boa o suficiente pra merecer pizza!", "🎭 Presença de palco nível semana acadêmica!", "🗣️ Soltou a voz sem medo do coeficiente!", "⚡ Energia de quem dormiu oito horas!", "🎤 Hoje o protagonismo veio forte!", "✨ A faculdade não estava pronta pra isso!", "👏 Palmas acadêmicas para essa lenda!", "🔥 Isso aqui merecia certificado de horas complementares!", "🎶 Cantou bonito e ainda saiu com moral!", "🏛️ O campus inteiro sentiu essa energia!", "🥂 Essa apresentação merece brinde no pós-aula!"
+        "😌 Afinação opcional, carisma obrigatório!",
+        "🎤 Tecnicamente duvidoso, emocionalmente impecável!",
+        "😂 A voz foi no susto, mas a presença entregou tudo!",
+        "🔥 Não sabemos a nota vocal, mas a autoestima foi 10!",
+        "👏 Errou pouco, brilhou muito, e é isso que importa!",
+        "🎶 A melodia tentou fugir, mas o carisma segurou!",
+        "😎 Cantou como quem confia no próprio marketing!",
+        "✨ A afinação oscilou, mas a lenda nasceu!",
+        "🎤 Foi no talento? Talvez. Na coragem? Com certeza!",
+        "😂 A música sofreu, mas a turma amou!",
+        "🔥 A voz deu umas voltas, mas chegou no destino!",
+        "👏 Não foi playback, foi bravura ao vivo!",
+        "😌 A nota veio, a vergonha não!",
+        "🎶 Afinou na intenção e venceu no carisma!",
+        "🎤 A técnica chorou, mas a plateia aplaudiu!",
+        "😂 Quem entendeu a letra, entendeu. Quem não entendeu, sentiu!",
+        "✨ Presença de palco maior que a grade curricular!",
+        "🔥 Cantou como quem não teme comentários no grupo!",
+        "👏 A melodia balançou, mas não caiu!",
+        "😎 Confiança de artista, preparo de aluno na véspera!",
+        "🎤 O microfone ficou confuso, mas respeitou!",
+        "😂 Foi uma experiência sonora e acadêmica!",
+        "🎶 A música saiu diferente, mas saiu com personalidade!",
+        "🔥 Entregou tudo, inclusive algumas notas inesperadas!",
+        "👏 A turma não pediu bis, mas pensou com carinho!",
+        "😌 A afinação foi freestyle, o carisma foi oficial!",
+        "🎤 O refrão veio forte, o resto veio na amizade!",
+        "😂 Cantou como quem descobriu a letra em tempo real!",
+        "✨ Foi caótico, foi fofo, foi memorável!",
+        "🔥 A energia compensou qualquer detalhe técnico!",
+        "👏 A voz passeou, mas a presença ficou!",
+        "🎶 O tom mudou, mas o espírito venceu!",
+        "😎 Entrou cantor casual, saiu patrimônio da resenha!",
+        "🎤 A nota musical fugiu, mas a nota do site veio!",
+        "😂 Performance digna de print no grupo da turma!",
+        "🔥 Cantou com a segurança de quem não leu o slide!",
+        "👏 A plateia riu, vibrou e adotou a apresentação!",
+        "😌 Deu tudo quase certo, e isso já é lindo!",
+        "🎶 Afinação em beta, carisma em versão final!",
+        "🎤 A voz foi sincera, mesmo quando não foi exata!",
+        "😂 O ouvido questionou, mas o coração aprovou!",
+        "✨ Brilhou tanto que ninguém teve tempo de julgar!",
+        "🔥 O palco viu coisas, mas saiu agradecido!",
+        "👏 A entrega foi maior que trabalho de fim de período!",
+        "😎 Cantou como veterano em semana de integração!",
+        "🎶 A melodia pediu calma, mas você foi com emoção!",
+        "🎤 A voz foi no improviso, o sucesso foi planejado!",
+        "😂 A apresentação foi ousada e surpreendentemente querida!",
+        "🔥 Se faltou nota, sobrou personalidade!",
+        "👏 Não foi perfeito, foi melhor: foi inesquecível!",
+        "🎤 A resenha ficou séria agora!",
+        "🔥 Essa apresentação elevou o nível da turma!",
+        "✨ O karaokê universitário acaba de ganhar um ícone!",
+        "🎓 Cantou como se valesse nota na AV2!",
+        "📣 A turma foi à loucura!",
+        "🥇 Performance digna de medalha no RU!",
+        "😂 Isso aqui virou show de intervalo!",
+        "🎶 Afinou mais que trabalho em grupo bem feito!",
+        "🚀 Essa voz passou direto!",
+        "👏 Professor nenhum reprovaria essa apresentação!",
+        "🌟 Nasceu uma lenda do campus!",
+        "🎤 Microfone desbloqueado com sucesso!",
+        "🔥 O auditório imaginário aplaudiu de pé!",
+        "📚 Cantou mais que estudou pra prova!",
+        "🥳 Essa foi pra fechar a noite com chave de ouro!",
+        "💅 Entregou voz, presença e conceito!",
+        "🏆 Nota alta e moral elevada!",
+        "🎧 DJ do campus aprovou!",
+        "🤩 Essa entrou pro histórico da turma!",
+        "🍕 Performance boa o suficiente pra merecer pizza!",
+        "🎭 Presença de palco nível semana acadêmica!",
+        "🗣️ Soltou a voz sem medo do coeficiente!",
+        "⚡ Energia de quem dormiu oito horas!",
+        "🎤 Hoje o protagonismo veio forte!",
+        "✨ A faculdade não estava pronta pra isso!",
+        "👏 Palmas acadêmicas para essa lenda!",
+        "🔥 Isso aqui merecia certificado de horas complementares!",
+        "🎶 Cantou bonito e ainda saiu com moral!",
+        "🏛️ O campus inteiro sentiu essa energia!",
+        "🥂 Essa apresentação merece brinde no pós-aula!"
+      ];
 
       lastMsgBox.textContent = "A comissão da torcida está calculando...";
+
       let contador = 0;
 
       const slot = setInterval(() => {
@@ -1011,6 +1035,7 @@
       }
     });
 
+    iniciarFotos();
     renderHistory();
   </script>
 </body>
